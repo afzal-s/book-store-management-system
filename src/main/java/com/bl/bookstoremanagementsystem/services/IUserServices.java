@@ -4,9 +4,9 @@ import com.bl.bookstoremanagementsystem.entity.User;
 
 public interface IUserServices {
 	
-	void add();
-	void display();
-	void delete();
-	void update();
-	User search(String name);
+	void addUser();
+	void displayUser();
+	void deleteUser();
+	void updateUser();
+	User searchUser();
 }

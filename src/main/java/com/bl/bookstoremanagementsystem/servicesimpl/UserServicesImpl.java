@@ -11,41 +11,50 @@ public class UserServicesImpl implements IUserServices {
 
 	IUserDao userDao = new UserDao();
 	
-	@Override
-	public void add() {
+	public void addUser() {
 		UserController userController = new UserController();
 		User userInfo = userController.getUserInfo();
-		userDao.add(userInfo);
+		userDao.add(userInfo);		
 	}
 
 	@Override
-	public void display() {
-		userDao.displayAll();
+	public void displayUser() {
+		userDao.displayAllUsers();
 	}
 
 	@Override
-	public void delete() {
-		String name = UScanner.getString("Enter User Name: ");
-		User user = search(name);
-		if (user != null) {
-			userDao.delete(user);
+	public void deleteUser() {
+		String userId = UScanner.getString("To Delete Enter User ID: ");
+		if (userId != null) {
+			boolean deleteUserById = userDao.delete(userId);
+			if (deleteUserById) {
+				System.out.println("User Deleted Successfully..");
+			} else {
+				System.out.println("User Not Found..");
+			}
 		}	
 	}
 
 	@Override
-	public User search(String name) {
-		String name1 = UScanner.getString("Enter User Name: ");
-		if (userDao.searchByName(name1) != null) {
-			return userDao.searchByName(name1);
-		} else {
-			System.out.println("This User Is Not Present");
+	public void updateUser() {
+		String userId = UScanner.getString("To Update Enter User ID: ");
+		if (userId != null) {
+			boolean updateUserById = userDao.update(userId);
+			if (updateUserById) {
+				System.out.println("User Updated Successfully..");
+			} else {
+				System.out.println("User Not Found..");
+			}
+		}
+	}
+
+	@Override
+	public User searchUser() {
+		String userId = UScanner.getString("Enter Id To Search: ");
+		if (userId != null) {
+			userDao.search(userId);
 		}
 		return null;
-	}
-	
-	@Override
-	public void update() {
-		
 	}
 
 }
